@@ -23,7 +23,7 @@ network:
           via: 192.168.254.1
           metric: 200
       nameservers:
-      addresses:
+        addresses:
           - 8.8.8.8
           - 8.8.4.4
       
