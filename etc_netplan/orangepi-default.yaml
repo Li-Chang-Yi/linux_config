@@ -13,7 +13,7 @@ network:
       nameservers:
         addresses:
           - 8.8.8.8
-          - 8.8.4.4
+          - 8.8.4.4      
     enP4p65s0:
       dhcp4: no
       addresses:
@@ -25,5 +25,4 @@ network:
       nameservers:
         addresses:
           - 8.8.8.8
-          - 8.8.4.4
-      
+          - 8.8.4.4      
