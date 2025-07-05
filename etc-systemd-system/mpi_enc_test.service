@@ -1,0 +1,27 @@
+[Unit]
+Description=mpi_enc_test Service
+After=mediamtx.service network-online.target
+Requires=mediamtx.service network-online.target
+
+[Service]
+Type=simple
+User=orangepi
+WorkingDirectory=/home/orangepi/Work/mpp-1.0.5/build/linux/aarch64/test/
+ExecStart=/home/orangepi/Work/mpp-1.0.5/build/linux/aarch64/test/mpi_enc_test -f 8 -i /dev/videoX -t 7 -w 1280 -h 1024 -v q
+Restart=on-failure
+RestartSec=5s
+
+# 延时启动
+ExecStartPre=/bin/sleep 25
+
+# 等待mediamtx监听端口后启动服务
+#ExecStartPre=/bin/bash -c 'until nc -z 192.168.6.6 8554; do echo "wait for mediamtx listen port 8554 ......"; sleep 1; done'
+
+LogRateLimitIntervalSec=10s
+LogRateLimitBurst=200
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=mpi_enc_test
+
+[Install]
+WantedBy=multi-user.target

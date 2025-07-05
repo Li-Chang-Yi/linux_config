@@ -1,0 +1,46 @@
+ps：1、在这个目录中的服务都是开机自启动的  2、先stop再reload才能使修改生效
+
+1、视频流服务器
+sudo systemctl daemon-reload 加载服务
+sudo systemctl start mediamtx  启动服务
+sudo systemctl stop mediamtx 停止服务
+sudo systemctl status mediamtx  查询服务状态
+sudo systemctl enable mediamtx 设置开机自启动
+sudo systemctl disable mediamtx 关闭开机自启动
+
+journalctl -u mediamtx -f  查看日志
+ps -ef | grep mediamtx 查询程序是否运行
+
+2、mpp编码推流程序
+/home/orangepi/Work/mpp-1.0.5/build/linux/aarch64/test/mpi_enc_test -f 8 -i /dev/videoX -t 7 -w 1280 -h 1024 -v q 命令行运行编码推流程序
+sudo systemctl daemon-reload 加载服务
+sudo systemctl start mpi_enc_test  启动服务
+sudo systemctl stop mpi_enc_test 停止服务
+sudo systemctl status mpi_enc_test  查询服务状态
+sudo systemctl enable mpi_enc_test 设置开机自启动
+sudo systemctl disable mpi_enc_test 关闭开机自启动
+
+journalctl -u mpi_enc_test -f  查看日志
+ps -ef | grep mpi_enc_test 查询程序是否运行
+
+3、VNC（端口5900开始）
+sudo systemctl daemon-reload 加载服务
+sudo systemctl start vncserver@1 启动服务
+sudo systemctl stop vncserver@1 停止服务
+sudo systemctl status vncserver@1 查询服务状态
+sudo systemctl enable vncserver@1 设置开机自启动
+sudo systemctl disable vncserver@1 关闭开机自启动
+
+journalctl -u vncserver@1 -f  查看日志
+ps -ef | grep vncserver@1查询程序是否运行
+
+1代表远程桌面端口：5901
+
+X、调试命令
+sudo tail -f /var/log/syslog
+sudo netstat -tulnp | grep 8554  查看端口状态
+nc -z 192.168.6.71 8554 && echo "端口被监听" || echo "端口未被监听"  
+
+
+
+

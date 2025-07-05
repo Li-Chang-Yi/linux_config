@@ -1,0 +1,13 @@
+[Unit]
+Description=Mediamtx Service
+After=network.target
+
+[Service]
+Type=simple
+User=orangepi
+WorkingDirectory=/home/orangepi/Work/mediamtx/
+ExecStart=/home/orangepi/Work/mediamtx/mediamtx
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
